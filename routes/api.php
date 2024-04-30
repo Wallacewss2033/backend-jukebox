@@ -21,13 +21,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::controller(TaskController::class)->group(function() {
-    Route::get('/tasks', 'index');
-    Route::post('/tasks', 'store');
-    Route::get('/tasks/{id}', 'show');
-    Route::put('/tasks/{id}', 'update');
-    Route::delete('/tasks/{id}', 'update');
+    Route::get('/tasks', 'index')->middleware('auth:sanctum');
+    Route::post('/tasks', 'store')->middleware('auth:sanctum');
+    Route::get('/tasks/{id}', 'show')->middleware('auth:sanctum');
+    Route::put('/tasks/{id}', 'update')->middleware('auth:sanctum');
+    Route::delete('/tasks/{id}', 'update')->middleware('auth:sanctum');
 });
 
 Route::controller(AuthController::class)->group(function() {
     Route::post('/login', 'login');
+    Route::post('/logout', 'logout')->middleware('auth:sanctum');
 });
+

@@ -40,4 +40,21 @@ class AuthController extends Controller
             ]
         ], Response::HTTP_OK);
     }
+
+    public function logout()
+    {
+
+        if (auth()->user()) {
+            auth()->user()->tokens()->delete();
+            return response([], Response::HTTP_OK);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Not found',
+            'errors' => [
+                'Usuário não encontrado'
+            ]
+        ], Response::HTTP_NOT_FOUND);
+    }
 }
