@@ -27,4 +27,9 @@ class TaskService {
         $data['id'] = $id;
         return $this->task->update($data);
     }
+
+    public function deleteTask(int $id) {
+        $data['id'] = $id;
+        return $this->task->delete($id);
+    }
 }

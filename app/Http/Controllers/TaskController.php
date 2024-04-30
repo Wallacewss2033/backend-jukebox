@@ -70,4 +70,19 @@ class TaskController extends Controller
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
+    public function delete(int $id) {
+        try 
+        {
+            return response()->json($this->service->deleteTask($id));
+        }
+        catch(Exception $e) 
+        {
+
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 }
