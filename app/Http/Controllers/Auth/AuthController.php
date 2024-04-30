@@ -57,4 +57,13 @@ class AuthController extends Controller
             ]
         ], Response::HTTP_NOT_FOUND);
     }
+
+    public function check()
+    {
+        if (auth()->check()) {
+            return response()->json(['success' => true, 'mensagem' => 'Usuário autenticado'], Response::HTTP_OK);
+        } 
+        
+        return response()->json(['success' => true, 'mensagem' => 'Token inválido'], Response::HTTP_UNAUTHORIZED);
+    }
 }
