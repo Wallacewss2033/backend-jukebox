@@ -56,4 +56,22 @@ class TaskController extends Controller
             ], $errorCode);
         }
     }
+
+    public function update(Request $request, int $id) {
+        try 
+        {
+            $data = $request->all();
+            $data['id'] = $id;
+            return response()->json($this->service->updateTask($data));
+        }
+        catch(Exception $e) 
+        {
+            $errorCode = $e->getCode() ?? Response::HTTP_INTERNAL_SERVER_ERROR;
+            
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], $errorCode);
+        }
+    }
 }

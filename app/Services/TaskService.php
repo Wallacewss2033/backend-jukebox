@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Interfaces\TaskInterface;
-use App\Repositories\TaskRepository;
 
 class TaskService {
 
@@ -22,5 +21,9 @@ class TaskService {
 
     public function getTask(int $id) {
         return $this->task->find($id);
+    }
+
+    public function updateTask(array $data) {
+        return $this->task->update($data);
     }
 }
