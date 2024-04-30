@@ -16,6 +16,7 @@ class TaskService {
     }
 
     public function setTask(array $data) {
+        $data['users_id'] = auth()->user()->id;
         return $this->task->create($data);
     }
 

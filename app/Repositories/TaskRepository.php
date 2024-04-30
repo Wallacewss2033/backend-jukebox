@@ -8,7 +8,7 @@ use App\Models\Task;
 class TaskRepository implements TaskInterface {
     public function all()
     {
-        return Task::paginate(10);
+        return Task::where('users_id', auth()->user()->id)->paginate(10);
     }
 
     public function create(array $data)
@@ -18,16 +18,16 @@ class TaskRepository implements TaskInterface {
 
     public function find(int $id)
     {
-        return Task::findOrFail($id);        
+        return Task::where('users_id', auth()->user()->id)->findOrFail($id);        
     }
 
     public function update(array $data)
     {
-        return Task::findOrFail($data['id'])->update($data);
+        return Task::where('users_id', auth()->user()->id)->findOrFail($data['id'])->update($data);
     }
 
     public function delete(int $id)
     {
-        return Task::findOrFail($id)->delete();        
+        return Task::where('users_id', auth()->user()->id)->findOrFail($id)->delete();        
     }
 }
