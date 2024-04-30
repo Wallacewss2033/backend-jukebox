@@ -24,7 +24,7 @@ class TaskController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage()
-            ], $e->getCode() ?? Response::HTTP_INTERNAL_SERVER_ERROR);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
     
@@ -38,7 +38,7 @@ class TaskController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage()
-            ], $e->getCode() ?? Response::HTTP_INTERNAL_SERVER_ERROR);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -49,29 +49,25 @@ class TaskController extends Controller
         }
         catch(Exception $e) 
         {
-            $errorCode = $e->getCode() ?? Response::HTTP_INTERNAL_SERVER_ERROR;
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage()
-            ], $errorCode);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
     public function update(Request $request, int $id) {
         try 
         {
-            $data = $request->all();
-            $data['id'] = $id;
-            return response()->json($this->service->updateTask($data));
+            return response()->json($this->service->updateTask($request->all(), $id));
         }
         catch(Exception $e) 
         {
-            $errorCode = $e->getCode() ?? Response::HTTP_INTERNAL_SERVER_ERROR;
-            
+
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage()
-            ], $errorCode);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }

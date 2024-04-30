@@ -18,16 +18,16 @@ class TaskRepository implements TaskInterface {
 
     public function find(int $id)
     {
-        return Task::find($id);        
+        return Task::findOrFail($id);        
     }
 
     public function update(array $data)
     {
-        return Task::find($data['id'])->update($data);
+        return Task::findOrFail($data['id'])->update($data);
     }
 
     public function delete(int $id)
     {
-        return Task::find($id)->delete();        
+        return Task::findOrFail($id)->delete();        
     }
 }

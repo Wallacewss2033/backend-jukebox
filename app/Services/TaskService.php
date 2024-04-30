@@ -23,7 +23,8 @@ class TaskService {
         return $this->task->find($id);
     }
 
-    public function updateTask(array $data) {
+    public function updateTask(array $data, $id) {
+        $data['id'] = $id;
         return $this->task->update($data);
     }
 }
