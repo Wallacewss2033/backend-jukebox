@@ -19,4 +19,8 @@ class TaskService {
     public function setTask(array $data) {
         return $this->task->create($data);
     }
+
+    public function getTask(int $id) {
+        return $this->task->find($id);
+    }
 }
