@@ -15,4 +15,8 @@ class TaskService {
     {
         return $this->task->all();
     }
+
+    public function setTask(array $data) {
+        return $this->task->create($data);
+    }
 }

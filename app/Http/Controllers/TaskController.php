@@ -27,4 +27,18 @@ class TaskController extends Controller
             ], $e->getCode() ?? Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+    
+    public function store(Request $request) {
+        try 
+        {
+            return response()->json($this->service->setTask($request->all()), Response::HTTP_CREATED);
+        }
+        catch(Exception $e) 
+        {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], $e->getCode() ?? Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 }
