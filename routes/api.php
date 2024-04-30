@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,4 +26,8 @@ Route::controller(TaskController::class)->group(function() {
     Route::get('/tasks/{id}', 'show');
     Route::put('/tasks/{id}', 'update');
     Route::delete('/tasks/{id}', 'update');
+});
+
+Route::controller(AuthController::class)->group(function() {
+    Route::post('/login', 'login');
 });
