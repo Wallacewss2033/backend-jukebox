@@ -21,17 +21,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware('auth:sanctum')->controller(TaskController::class)->group(function() {
-    Route::get('/tasks', 'index');
-    Route::post('/tasks', 'store');
-    Route::get('/tasks/{id}', 'show');
-    Route::put('/tasks/{id}', 'update');
-    Route::delete('/tasks/{id}', 'delete');
+    Route::get('/tasks', 'index')->name('tasks.index');
+    Route::post('/tasks', 'store')->name('tasks.store');
+    Route::get('/tasks/{id}', 'show')->name('tasks.show');
+    Route::put('/tasks/{id}', 'update')->name('tasks.update');
+    Route::delete('/tasks/{id}', 'delete')->name('tasks.delete');
 });
 
 Route::controller(AuthController::class)->group(function() {
-    Route::post('/login', 'login');
-    Route::post('/login-firebase', 'loginFireBase');
-    Route::post('/logout', 'logout')->middleware('auth:sanctum');
-    Route::get('/check', 'check')->middleware('auth:sanctum');
+    Route::post('/login', 'login')->name('login');;
+    Route::post('/login-firebase', 'loginFirebase')->name('tasks.loginFirebase');;
+    Route::post('/logout', 'logout')->name('logout')->middleware('auth:sanctum');
+    Route::get('/check', 'check')->name('check')->middleware('auth:sanctum');
 });
 

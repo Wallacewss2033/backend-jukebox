@@ -74,7 +74,7 @@ class AuthController extends Controller
 
 
 
-    public function loginFireBase(Request $request, User $user)
+    public function loginFirebase(Request $request, User $user)
     {
         try {
             $auth = Firebase::auth();
