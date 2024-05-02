@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:sanctum')->controller(TaskController::class)->group(function() {
+Route::middleware('auth:api')->controller(TaskController::class)->group(function() {
     Route::get('/tasks', 'index')->name('tasks.index');
     Route::post('/tasks', 'store')->name('tasks.store');
     Route::get('/tasks/{id}', 'show')->name('tasks.show');

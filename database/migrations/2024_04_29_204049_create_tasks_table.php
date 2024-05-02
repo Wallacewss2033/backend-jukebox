@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->constrained();
+            $table->foreignUuid('users_id');
             $table->string('title');
             $table->text('description');
             $table->timestamps();
