@@ -25,11 +25,12 @@ Route::middleware('auth:sanctum')->controller(TaskController::class)->group(func
     Route::post('/tasks', 'store');
     Route::get('/tasks/{id}', 'show');
     Route::put('/tasks/{id}', 'update');
-    Route::delete('/tasks/{id}', 'update');
+    Route::delete('/tasks/{id}', 'delete');
 });
 
 Route::controller(AuthController::class)->group(function() {
     Route::post('/login', 'login');
+    Route::post('/login-firebase', 'loginFireBase');
     Route::post('/logout', 'logout')->middleware('auth:sanctum');
     Route::get('/check', 'check')->middleware('auth:sanctum');
 });
