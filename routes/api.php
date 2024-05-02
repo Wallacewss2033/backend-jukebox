@@ -29,9 +29,9 @@ Route::middleware('auth:api')->controller(TaskController::class)->group(function
 });
 
 Route::controller(AuthController::class)->group(function() {
-    Route::post('/login', 'login')->name('login');;
+    Route::post('/login', 'login')->name('login');
     Route::post('/login-firebase', 'loginFirebase')->name('tasks.loginFirebase');;
-    Route::post('/logout', 'logout')->name('logout')->middleware('auth:sanctum');
-    Route::get('/check', 'check')->name('check')->middleware('auth:sanctum');
+    Route::post('/logout', 'logout')->name('logout')->middleware('auth:api');
+    Route::get('/check', 'check')->name('check')->middleware('auth:api');
 });
 

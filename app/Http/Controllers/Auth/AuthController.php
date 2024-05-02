@@ -77,36 +77,28 @@ class AuthController extends Controller
     public function loginFirebase(Request $request, User $user)
     {
         try {
-            $auth = Firebase::auth();
-            $verify = $auth->verifyIdToken($request->bearerToken());
-            if ($verify) {
-                $name = explode("@", $request->email)[0];
-                $userAuth = $user->firstOrCreate(
-                    ['email' => $request->email],
-                    [
-                        'name' => $name,
-                        'email' => $request->email,
-                        'provider' => $request->provider,
-                        'password' => Hash::make($request->password)
-                    ]
-                );
+            $name = explode("@", $request->email)[0];
 
-                return response()->json([
-                    'success' => true,
-                    'message' => 'success',
-                    'user' => [
-                        'name' => $userAuth->name
-                    ],
-                    'authorization' => [
-                        'token' => $userAuth->createToken('auth-token')->plainTextToken,
-                        'type' => 'bearer',
-                    ]
-                ], Response::HTTP_OK);
+            if(!$user->first('email', $request->email)) {
+                $user->uuid = $request->id;
+                $user->name = $name;
+                $user->email = $request->email;
+                $user->provider = $request->provider;
+                $user->save();
             }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'success',
+                'user' => [
+                    'name' => $name
+                ],
+            ], Response::HTTP_OK);
         } catch (Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage(),
+                'request' => $request->id
             ], 500);
         }
     }
