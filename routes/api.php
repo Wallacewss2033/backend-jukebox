@@ -29,7 +29,7 @@ Route::middleware('auth:api')->controller(TaskController::class)->group(function
 });
 
 Route::controller(AuthController::class)->group(function() {
-    Route::post('/login-firebase', 'loginFirebase')->name('tasks.loginFirebase')->middleware('auth:api');
+    Route::post('/login-firebase', 'loginFirebase')->name('tasks.loginFirebase');
     Route::get('/check', 'check')->name('check')->middleware('auth:api');
 });
 
