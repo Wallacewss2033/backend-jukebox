@@ -8,7 +8,7 @@ use App\Models\Task;
 class TaskRepository implements TaskInterface {
     public function all()
     {
-        return Task::where('users_id', auth()->user()->id)->orderBy('created_at', 'DESC')->paginate(10);
+        return Task::where('users_id', auth()->user()->id)->orderBy('created_at', 'DESC')->paginate(12);
     }
 
     public function create(array $data)
